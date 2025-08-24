@@ -7,4 +7,4 @@ def check_password_strength(password):
             return "strong"
         else:
             return "medium"
-print(check_password_strength('abcd'))//
+print(check_password_strength('abcd'))
