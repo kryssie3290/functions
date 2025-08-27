@@ -36,8 +36,8 @@ def add_student():
     age = int(input("student age: "))
     department = input("department: ")
     students_db[1] = {"name": name, "age": age, "department": department}
-    print(len(students_db) + 1)
-    print(students_db)
+    key =  len(students_db) + 1
+    students_db[key] = {"name": name, "age": age, "department": department}
 
 def delete_student():
     student_id = int(input("student id to delete"))
@@ -74,41 +74,32 @@ want to update??
           print("student not found")
     
 def get_student():
-    student_id = int(input("enter stdent id: "))
-    if not  students_db:
-        print("no syudent found")
-    else:
-        print("\n---for all students---")
-        for student_id, info in students_db.items():
-            print(f"id: {student_id}, name: {info['name']}, age: {info['age']}, department: {info['department']}")
-        print()
+    student = int(input("enter stdent id: "))
+    for student_id in students_db:
+        name = students_db[student]['name']
+        if student == name:
+            print(f"id: {student_id}, name: {students_db[student_id]['name']}, age: {students_db[student_id]['age']}, department: {students_db[student_id]['department']}")
+        
 def display_student():
     if not students_db:
         print("no students yet")
     else:
         for student_id, info in students_db.items():
             print(f"id: {student_id}")
-            print(f"name: {info['name']}")
-            print(f"age: {info['age']}")
-            print(f"department: {info['department']}")
+            print(f"name: {students_db[student_id]['name']}")
+            print(f"age: {students_db[student_id]['age']}")
+            print(f"department: {students_db[student_id]['department']}")
             print("------------------")
 def search_student_by_name():
-    if not students_db:
-        print("no student in the system")
-        return
-    name = input("search name: ").strip().lower()
-    found = False
-    for student_id, info in students_db.items():
-        if info['name'].lower == name:
+    student_name = input("search name: ").strip().lower()
+    for student_id in students_db:
+        name = students_db[student_id]['name']
+        if name == name:
             print("student found")
             print(f"id: {student_id}")
-            print(f"name: {info['name']}")
-            print(f"age: {info['age']}")
-            print(f"department: {info['department']}")
-            found = True
-            break
-    if not found:
-       print("no student found with that name")
+            print(f"name: {students_db[student_id]['name']}")
+            print(f"age: {students_db[student_id]['age']}")
+            print(f"department: {students_db[student_id]['department']}")
 def count_students():
     total = len(students_db)
     print(f"total number of students: {total}")
