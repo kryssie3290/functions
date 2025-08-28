@@ -11,7 +11,8 @@ def start():
         print("3. sell product")
         print("4. display inventory")
         print("5. total potential sales")
-        print("6. exit")
+        print("6. most expensive product")
+        print("7. exit")
         choice = input("enter your choice (1-7)")
         if choice == "1":
             add_product(store)
@@ -24,6 +25,8 @@ def start():
         elif choice == "5":
             total_potential_sales(store)
         elif choice == "6":
+            most_expensive_product(store)
+        elif choice == "7":
             print("goodbye kryssie")
             break
         else:
@@ -76,4 +79,12 @@ def total_potential_sales(store):
         total += details['price'] * details['quantity']
     print(f"total value of all remaining stock: {total}")
     return total
+def most_expensive_product(store):
+    max_price = 0
+    max_product = ""
+    for name, info in store.items():
+        if info["price"] > max_price:
+            max_price = info["price"]
+            max_product = name
+    print(f"most expensive product is {max_product} - {max_price}")
 start()
